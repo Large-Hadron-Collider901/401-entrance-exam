@@ -28,9 +28,6 @@ class App extends React.Component {
     this.setState({ items });
   }
 
-  async componentDidMount() {
-    await this.getItems();
-  }
 
   render() {
     return (

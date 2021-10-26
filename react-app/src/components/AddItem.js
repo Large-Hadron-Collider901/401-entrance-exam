@@ -27,7 +27,7 @@ class AddNewItem extends React.Component {
   render() {
 
     return (
-      <Form data-testid="add-form" onSubmit={this.handleSubmit}>
+      <Form data-testid="add-form" onSubmit={this.handleChange}>
         <Card style={{ width: '18rem' }}>
           <Card.Header>Add Item</Card.Header>
           <Card.Body>
@@ -39,7 +39,7 @@ class AddNewItem extends React.Component {
               <Form.Label>Description</Form.Label>
               <Form.Control type="text" placeholder="Description" data-testid="add-form-description" name="description" onChange={this.handleChange} />
             </Form.Group>
-            <Button variant="primary" type="submit">Add Item</Button>
+            <Button variant="primary" type="submit" onClick={this.handleSubmit}>Add Item</Button>
           </Card.Body>
         </Card>
       </Form>
