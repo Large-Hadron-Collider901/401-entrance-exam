@@ -7,6 +7,7 @@ import Form from './components/AddItem.js';
 import Items from './components/Items.js';
 
 const API_SERVER = process.env.REACT_APP_API;
+// const API_SERVER = "http://localhost:3001";
 
 class App extends React.Component {
 
@@ -16,11 +17,19 @@ class App extends React.Component {
       items: []
     }
   }
-
+  // Add a new item based on what was entered in the form
   addItem = async (item) => {
+    //const response = await axios.post(`${API_SERVER}/items`,item);
     await axios.post(`${API_SERVER}/items`, item);
-    this.getItems();
+    this.getItems(); // browser refresh
   }
+
+  // add callback for deleting items 
+  deleteItem = async (id) => {
+    await axios.delete(`${API_SERVER}/items/${id}`);
+   this.getItems();
+  }
+
 
   getItems = async () => {
     const response = await axios.get(`${API_SERVER}/items`);
@@ -28,6 +37,10 @@ class App extends React.Component {
     this.setState({ items });
   }
 
+
+  async componentDidMount() {
+    await this.getItems();// browser refresh
+  }
 
   render() {
     return (
@@ -44,7 +57,7 @@ class App extends React.Component {
               <Form handleAddItem={this.addItem} />
             </Col>
             <Col>
-              <Items itemsList={this.state.items} />
+              <Items itemsList={this.state.items} handleDelete={this.deleteItem} />
             </Col>
           </Row>
         </Container>

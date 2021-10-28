@@ -10,13 +10,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+// This endpoint will route to get all items
 app.get('/items', Data.getAllItems);
 app.get('/items/:id', Data.getOneItem);
 app.post('/items', Data.addAnItem);
+// Add support for delete
 app.delete('/items/:id', Data.deleteOneItem);
 
+// catch all for anything that dont match
 app.use('*', (req,res) => {
-  res.status(404).send('These are not the droids you are looking for.');
+  res.status(404).send('Nothing matched.');
 });
 
 app.use( (error,req,res,next) => {
